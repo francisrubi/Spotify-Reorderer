@@ -1,0 +1,7 @@
+# Python
+backend/app/__pycache__/
+backend/venv
+backend/.env
+
+# React
+frontend/node_modules
