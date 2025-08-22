@@ -1,9 +1,11 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Header, HTTPException
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.responses import RedirectResponse, JSONResponse
 from dotenv import load_dotenv
 from authlib.integrations.starlette_client import OAuth
 import os
+
+from app.services.spotify import obter_playlists_usuario
 
 load_dotenv()
 
@@ -42,3 +44,16 @@ async def callback(request: Request):
         "token": token,
         "profile": profile
     })
+
+@app.get("/minhas-playlists")
+def minhas_playlists(authorization: str = Header(...)):
+    """
+    Rota que retorna playlists do usuário autenticado no Spotify.
+    O token deve ser enviado no header Authorization: Bearer <token>
+    """
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=400, detail="Token inválido")
+
+    token = authorization.split(" ")[1]
+    playlists = obter_playlists_usuario(token)
+    return playlists
