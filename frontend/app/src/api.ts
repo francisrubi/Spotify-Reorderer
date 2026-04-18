@@ -117,6 +117,17 @@ export function getLoginUrl(): string {
   return `${API_BASE}/login`;
 }
 
+/**
+ * Fire-and-forget request to wake up the backend.
+ * Used on the login screen because the free tier of our host (Render)
+ * spins down the container after 15min idle; first request after that
+ * takes ~30-50s. Warming up while the user reads the login page removes
+ * that latency from the OAuth redirect.
+ */
+export function pingApi(): void {
+  fetch(`${API_BASE}/docs`).catch(() => {});
+}
+
 export function getProfile(): Promise<UserProfile> {
   return authFetch<UserProfile>("/me");
 }

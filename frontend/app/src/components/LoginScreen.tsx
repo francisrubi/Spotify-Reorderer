@@ -1,9 +1,14 @@
-import { getLoginUrl } from "../api";
+import { useEffect } from "react";
+import { getLoginUrl, pingApi } from "../api";
 import { CREATOR_LINKS } from "../constants";
 import { t } from "../i18n";
 import { GithubIcon, SpotifyIcon } from "./icons";
 
 export function LoginScreen() {
+  useEffect(() => {
+    pingApi();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col p-5">
       <div className="flex-1 flex flex-col items-center justify-center text-center">
