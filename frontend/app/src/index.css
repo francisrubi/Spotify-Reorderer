@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-spotify-green: #1db954;
+  --color-spotify-green-hover: #1ed760;
+  --color-spotify-bg-base: #121212;
+  --color-spotify-bg-elevated: #181818;
+  --color-spotify-bg-sidebar: #000000;
+  --color-spotify-border: #282828;
+  --color-spotify-hover: #282828;
+  --color-spotify-text-muted: #b3b3b3;
+  --color-spotify-error: #e74c3c;
+  --radius-pill: 9999px;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-spotify-bg-base);
+  color: #fff;
+  font-family: var(--font-sans);
+}
